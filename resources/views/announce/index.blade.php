@@ -22,7 +22,7 @@
            @foreach ($announces as $item)
                 <tr>
                     <th scope="row"> {{ $item->id }} </th>
-                    {{-- <td> {{ $item->photo }} </td> --}}
+                    <td> {{ $item->photo }} </td>
                     <td> {{ $item->titre }} </td>
                     <td> {{ $item->description }} </td>
                     <td> {{ $item->ville }} </td>
