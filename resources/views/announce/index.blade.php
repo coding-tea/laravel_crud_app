@@ -8,6 +8,7 @@
             <thead>
             <tr>
                 <th scope="col">#</th>
+                <th scope="col">image</th>
                 <th scope="col">titre</th>
                 <th scope="col">description</th>
                 <th scope="col">ville</th>
@@ -22,7 +23,7 @@
            @foreach ($announces as $item)
                 <tr>
                     <th scope="row"> {{ $item->id }} </th>
-                    <td> {{ $item->photo }} </td>
+                    <td> <img src="{{ isset($item->photo)?asset('images/' . $item->photo):asset('images/default') }}" alt="{{ $item->titre }}"> </td>
                     <td> {{ $item->titre }} </td>
                     <td> {{ $item->description }} </td>
                     <td> {{ $item->ville }} </td>
