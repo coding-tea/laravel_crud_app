@@ -12,7 +12,7 @@ class announceController extends Controller
      */
     public function index()
     {
-        $announces =Announce::all();
+        $announces = Announce::all();
         return view('announce.index', compact('announces'));
     }
 
@@ -29,8 +29,36 @@ class announceController extends Controller
      */
     public function store(Request $request)
     {
-        Announce::create($request->all());
-        return redirect()->route('');
+        $request->validate([
+            'titre' => 'required|alpha',
+            'description' => 'required|alpha',
+            'ville' => 'required|alpha',
+            'type' => 'required|alpha',
+            'superficie' => 'required|numeric|min:0',
+            'prix' => 'required|numeric|min:0',
+            'neuf' => 'required|numeric|min:0',
+            'image' => 'image'
+        ]);
+
+        $image_name = null;
+        if($request->image)
+        {
+            $image_name = time() . '.' . $request->image->extension();
+            $request->image->storeAs('images', $image_name);
+        }
+
+        Announce::create([
+            'titre' => $request->titre,
+            'description' => $request->description,
+            'ville' => $request->ville,
+            'type' => $request->type,
+            'superficie' => $request->superficie,
+            'prix' => $request->prix,
+            'neuf' => $request->neuf,
+            'image' => $image_name
+        ]);
+
+        return redirect()->route('announces.index');
     }
 
     /**
@@ -54,8 +82,18 @@ class announceController extends Controller
      */
     public function update(Request $request, Announce $announce)
     {
+        $request->validate([
+            'titre' => 'required|alpha',
+            'description' => 'required|alpha',
+            'ville' => 'required|alpha',
+            'type' => 'required|alpha',
+            'superficie' => 'required|numeric|min:0',
+            'prix' => 'required|numeric|min:0',
+            'neuf' => 'required|numeric|min:0',
+            'image' => 'image'
+        ]);
         $announce->update($request->all());
-        return redirect()->back();
+        return redirect()->route('announces.index');
     }
 
     /**
@@ -64,6 +102,6 @@ class announceController extends Controller
     public function destroy(Announce $announce)
     {
         $announce->delete();
-        return redirect()->back();
+        return redirect()->route('announces.index');
     }
 }
