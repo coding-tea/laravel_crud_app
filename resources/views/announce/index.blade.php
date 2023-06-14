@@ -2,7 +2,7 @@
 @section('content')
 
 <div class="container">
-    <button class="btn btn-primary"> <a href="{{ route('announces.create') }}">create announce</a> </button>
+    <a class="btn btn-primary" href="{{ route('announces.create') }}">create announce</a>
     @isset($announces)
         <table class="table">
             <thead>
