@@ -2,7 +2,7 @@
 @section('content')
 
 <div class="container">
-    <a class="btn btn-primary" href="{{ route('announces.create') }}">create announce</a>
+    <a class="btn btn-primary mb-3" href="{{ route('announces.create') }}">create announce</a>
     @isset($announces)
         <table class="table">
             <thead>
@@ -23,7 +23,7 @@
            @foreach ($announces as $item)
                 <tr>
                     <th scope="row"> {{ $item->id }} </th>
-                    <td> <img src="{{ isset($item->photo)?asset('images/' . $item->photo):asset('images/default') }}" alt="{{ $item->titre }}"> </td>
+                    <td> <img width="120px" src="{{ isset($item->image)?asset('image/' . $item->image):asset('images/default.jpg') }}" alt="{{ $item->titre }}"> </td>
                     <td> {{ $item->titre }} </td>
                     <td> {{ $item->description }} </td>
                     <td> {{ $item->ville }} </td>

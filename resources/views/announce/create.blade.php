@@ -2,6 +2,16 @@
 @section('content')
 
 <div class="container">
+    @if($errors->any())
+        @foreach ($errors->all() as $item)
+        <div class="alert alert-danger" role="alert">
+            {{ $item }}
+        </div>
+        @endforeach
+    @endif
+</div>
+
+<div class="container">
     <form method="post" action="{{ route('announces.store') }}" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
@@ -15,12 +25,12 @@
         </div>
 
         <div class="mb-3">
-            <label for="titre" class="form-label">type</label>
-            <select class="form-select" id="titre" name="titre">
+            <label for="type" class="form-label">type</label>
+            <select class="form-select" id="type" name="type">
                 @for ($i = 0; $i < count(['Appartement', 'Maison', 'Villa', 'Magasin', 
                 'Terrain']); $i++)
                     <option value='{{ ['Appartement', 'Maison', 'Villa', 'Magasin', 
-                    'Terrain'][$i] }}' > {{ ['Appartement', 'Maison', 'Villa', 'Magasin', 
+                    'Terrain'][$i] }}' {{ $i==1?'selected':'' }}> {{ ['Appartement', 'Maison', 'Villa', 'Magasin', 
                         'Terrain'][$i] }} </option>
                 @endfor
             </select>
