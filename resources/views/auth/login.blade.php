@@ -2,6 +2,16 @@
 @section('content')
 
 <div class="container">
+    @if($errors->any())
+        @foreach ($errors->all() as $item)
+        <div class="alert alert-danger" role="alert">
+            {{ $item }}
+        </div>
+        @endforeach
+    @endif
+</div>
+
+<div class="container">
     <form method="post" action="{{ route('action.login') }}">
         @csrf
         <div class="mb-3">

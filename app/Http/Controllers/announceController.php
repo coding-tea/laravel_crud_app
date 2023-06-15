@@ -30,21 +30,19 @@ class announceController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'titre' => 'required|alpha',
-            'description' => 'required|alpha',
-            'ville' => 'required|alpha',
-            'type' => 'required|alpha',
+            'titre' => 'required|string',
+            'description' => 'required|string',
+            'ville' => 'required|string',
             'superficie' => 'required|numeric|min:0',
             'prix' => 'required|numeric|min:0',
             'neuf' => 'required|numeric|min:0',
-            'image' => 'image'
         ]);
 
         $image_name = null;
         if($request->image)
         {
             $image_name = time() . '.' . $request->image->extension();
-            $request->image->storeAs('images', $image_name);
+            $request->image->storeAs('image', $image_name);
         }
 
         Announce::create([
